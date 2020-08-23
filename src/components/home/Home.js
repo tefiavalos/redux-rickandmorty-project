@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Card from '../card/Card'
 import { connect } from 'react-redux'
 import { nextPageAction } from '../../redux/charsDuck'
 import './home.css'
 
 
-function Home({characters, nextPageAction}) {
+function Home({characters, nextPageAction, location, episode}) {
     function renderCharacter(chars, i) {
         return (
             <Card {...chars} key={i}/>
@@ -17,10 +18,16 @@ function Home({characters, nextPageAction}) {
             nextPageAction()
         )
     }
-    
 
     return (
         <>
+        <div>
+            <form>
+                <input type="radio" value="Locations" />
+                <label>Locations</label>
+            </form>
+        </div>
+        
         <div className="container-characters">
             {characters.map(renderCharacter)}
         </div>
@@ -29,11 +36,13 @@ function Home({characters, nextPageAction}) {
     )
 }
 
-function mapState({ characters }) {
+function mapState({ data }) {
 
     return {
-        characters: characters.array,
-        nextPage: characters.nextPage
+        characters: data.character,
+        nextPage: data.nextPage,
+        location: data.location,
+        episode: data.episode
     }
 }
 
