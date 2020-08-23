@@ -59,6 +59,7 @@ export let getCharacterAction = () => (dispatch) => {
           results{
             name
             image
+            type
           }
         }
       }
@@ -132,6 +133,7 @@ export let getLocationsAction = () => (dispatch) => {
       prev
     }
   results{
+    name
     dimension
     residents{
       name
