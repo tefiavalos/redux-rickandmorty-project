@@ -1,0 +1,18 @@
+.container-search{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #D64045;
+    padding: 20px;
+}
+
+input[type=text] {
+    width: 50%;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #D64045;    
+    font-family: 'Grandstander';
+    font-size: 20px
+  }

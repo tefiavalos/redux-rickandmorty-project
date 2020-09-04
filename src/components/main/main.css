@@ -1,0 +1,16 @@
+main{
+    display: flex;
+    background-color: #eee;
+}
+
+.container-characters{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card-container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

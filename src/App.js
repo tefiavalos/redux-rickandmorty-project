@@ -1,13 +1,13 @@
 import React from 'react';
-import Home from './components/home/Home'
+import Main from './components/main/Main'
 import Nav from './components/nav/Nav'
 import './App.css';
 
 function App() {
   return (
-    <>
-    <Home></Home>
-    </>
+    <div className='app-container'>
+    <Main></Main>
+    </div>
   );
 }
 

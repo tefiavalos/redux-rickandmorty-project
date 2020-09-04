@@ -1,28 +1,44 @@
 import React, { useState } from 'react'
+import Modal from '../modal/Modal'
 import './card.css'
 
 export default function Card({
-    name, image, dimension, episode, type, created
+    name, image, dimension, episode, type, created, gender, species
 }) {
 
-    const [display, setDisplay] = useState("none")
+    const [open, setOpen] = React.useState(false);
 
-    function handleClick() {
-        setDisplay(display === "none" ? "block" : "none")
-    }
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <>
-            <div onClick={handleClick}>
+            <div className="container">
                 <h1>
                     {name}
                 </h1>
-                <div >
-                    {image ? <img alt={name} src={image} /> : dimension || episode}
-                </div>
-                <modal className={`${display}`}>
-                    <h1>{name}</h1>
-                    {type ? <h1>{type}</h1> : <h1>{created}</h1>}
-                </modal>
+
+                {image ? <img className="data-image" alt={name} src={image} /> : dimension || episode}
+                <button className={`button-modal`} onClick={handleOpen}>
+                    See more
+                </button>
+                <Modal
+                    handleClose={handleClose}
+                    handleOpen={handleOpen}
+                    open={open}
+                    name={name}
+                    type={type}
+                    created={created}
+                    gender={gender}
+                    species={species}
+                    image={image}
+                    dimension={dimension}
+                    episode={episode}></Modal>
             </div>
 
         </>

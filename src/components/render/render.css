@@ -1,0 +1,14 @@
+.container-render{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: #eee;
+    margin-left: 200px
+}
+
+.loading{
+    color: #D64045;
+    text-align: center;
+}
+
