@@ -14,5 +14,6 @@ input[type=text] {
     background-color: #eee;
     border: 1px solid #D64045;    
     font-family: 'Grandstander';
-    font-size: 20px
+    font-size: 20px;
+    margin-left: 200px
   }

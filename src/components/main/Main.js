@@ -3,6 +3,7 @@ import Card from '../card/Card'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Render from '../render/Render'
+import Loading from '../loading/Loading'
 import { connect } from 'react-redux'
 import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/charsDuck'
 import './main.css'
@@ -28,7 +29,8 @@ function Home({ characters, nextPageAction, location, episode, fetching,
 
     function renderEpisode(episode, i) {
         return (
-            <Card {...episode} key={i} />
+            <Card {...episode} episodeCharacter={episode.characters} key={i} />
+            
         )
     }
 
@@ -42,15 +44,17 @@ function Home({ characters, nextPageAction, location, episode, fetching,
         setFormSearch(e.target.value);
     }
 
+    if(fetching){
+        return(
+            <Loading message={'Mientras carga, toma tu birrita'}/>
+        )
+    }
+
     return (
         <main>
             <Filter filter={filter}></Filter>
             <div className="card-container">
-            {fetching ?
-            <div>
-            <h1 className='loading'>Mientras buscas, tomate tu birrita</h1>
-            <img src='https://images.vexels.com/media/users/3/137941/isolated/preview/62e3913301b94a8effd0e834369d8bb2-ilustraci--n-de-tarro-de-cerveza-by-vexels.png'></img>    
-            </div> : valor === "characters" &&
+            {valor === "characters" &&
             <>
             <Search handleChange={handleChange} formSearch={formSearch}></Search>
             <Render 

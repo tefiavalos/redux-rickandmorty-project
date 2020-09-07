@@ -1,13 +1,14 @@
 import React from 'react'
 import Card from '../card/Card'
 import Button from '../button/Button'
+import Loading from '../loading/Loading'
 import Pagination from '@material-ui/lab/Pagination'
 import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/charsDuck'
 import { connect } from 'react-redux'
 import './render.css'
 
-export function Render({ formSearch, handleClick, render, data, handleClickPrev, pagesCh }) {
-    console.log(pagesCh)
+export function Render({ characters, formSearch, handleClick, render, data, handleClickPrev, nextPage, pagesCh }) {
+    
     return (
         <>
             <Button handleClickPrev={handleClickPrev} message={'<'} />
@@ -19,16 +20,13 @@ export function Render({ formSearch, handleClick, render, data, handleClickPrev,
                     )
                 })}
                 {formSearch && formSearch.length < 3 &&
-                    <div>
-                        <h1 className='loading'>Mientras buscas, tomate tu birrita</h1>
-                        <img src='https://images.vexels.com/media/users/3/137941/isolated/preview/62e3913301b94a8effd0e834369d8bb2-ilustraci--n-de-tarro-de-cerveza-by-vexels.png'></img>
-                    </div>}
+                    <Loading message={'Mientras buscas, tomá tu birrita (y dame 3 caracteres)'}/>}
                 {!formSearch && data.map(render)}
             </div>
-            <Button message={'anterior'} />
-            <Button handleClick={handleClick} message={'siguiente'} />
-            <Pagination count={pagesCh} color="secondary" />
-                    </>
+            <Button handleClickPrev={handleClickPrev} message={'<'} />
+            <Button handleClickNext={handleClick} message={'>'} />
+           {/*  <Pagination count={34} color="secondary" /> */}
+        </>
     )
 }
 
@@ -36,12 +34,11 @@ function mapState({ data }) {
 
     return {
         characters: data.character,
-        nextPage: data.nextPage,
+        nextPage: data.nextPageCh,
         prevPage: data.prevPage,
         location: data.location,
         episode: data.episode,
-        fetching: data.fetching,
-        pagesCh: data.pagesCh
+        fetching: data.fetching
     }
 }
 

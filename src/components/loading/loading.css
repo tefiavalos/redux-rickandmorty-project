@@ -1,0 +1,9 @@
+.loading-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loading{
+    color: #D64045;
+    text-align: center;
+}

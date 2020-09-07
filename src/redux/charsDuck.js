@@ -12,7 +12,8 @@ let initialData = {
   prevPageCh: null,
   prevPageEp: null,
   prevPageLo: null,
-  pagesCh: null
+  pagesCh: null,
+  page: 1
 }
 
 let client = new ApolloClient({
@@ -51,7 +52,7 @@ export default function reducer(state = initialData, action) {
     case GET_LOCATION_ERROR:
       return { ...state, fetching: false, error: action.payload }
     case GET_LOCATION_SUCCESS:
-      return { ...state, location: action.payload, fetching: false }
+      return { ...state, location: action.payload, fetching: false}
     case UPDATE_CH_PAGE:
       return { ...state, nextPageCh: action.payload }
     case UPDATE_LO_PAGE:
@@ -65,7 +66,7 @@ export default function reducer(state = initialData, action) {
     case PREV_EP_PAGE:
       return { ...state, prevPageEp: action.payload }
     case GET_CHARACTERS:
-      return { ...state, fetching: true }
+      return { ...state, fetching: true, page: action.payload }
     case GET_CHARACTERS_ERROR:
       return { ...state, fetching: false, error: action.payload }
     case GET_CHARACTERS_SUCCESS:
@@ -80,6 +81,11 @@ export let getCharacterAction = () => (dispatch) => {
   let query = gql`
     query ($page:Int){
         characters(page:$page){
+          info{
+            pages
+            next
+            prev
+          }
           results{
             name
             image
@@ -108,7 +114,6 @@ export let getCharacterAction = () => (dispatch) => {
         type: GET_CHARACTERS_SUCCESS,
         payload: data.characters.results
       })
-
     })
 }
 
@@ -427,3 +432,44 @@ export let prevPageEpisodesAction = () => (dispatch, getState) => {
     }
     )
 } 
+
+export function getPage(dispatch) {
+  let query = gql`
+    query ($page:Int){
+        characters(page:$page){
+          info{
+            pages
+            next
+            prev
+          }
+          results{
+            name
+            image
+            type
+            gender
+            species
+          }
+        }
+      }
+    `
+
+    dispatch({
+      type: GET_CHARACTERS
+    })
+    return client.query({
+      query
+    })
+      .then(({ data, error }) => {
+        if (error) {
+          dispatch({
+            type: PAGES_CH,
+            payload: error
+          })
+          return
+        }
+        dispatch({
+          type: PAGES_CH,
+          payload: data.characters.info.pages
+        })
+      })
+}

@@ -3,9 +3,8 @@ import Modal from '../modal/Modal'
 import './card.css'
 
 export default function Card({
-    name, image, dimension, episode, type, created, gender, species
+    name, image, dimension, episode, type, created, gender, species, residents, data, episodeCharacter
 }) {
-
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -24,7 +23,7 @@ export default function Card({
                 </h1>
 
                 {image ? <img className="data-image" alt={name} src={image} /> : dimension || episode}
-                <button className={`button-modal`} onClick={handleOpen}>
+                <button className='button-card' onClick={handleOpen}>
                     See more
                 </button>
                 <Modal
@@ -38,7 +37,9 @@ export default function Card({
                     species={species}
                     image={image}
                     dimension={dimension}
-                    episode={episode}></Modal>
+                    episode={episode}
+                    episodeCharacters={episodeCharacter} 
+                    residents={residents}></Modal>
             </div>
 
         </>
