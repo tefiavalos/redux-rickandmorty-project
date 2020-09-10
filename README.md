@@ -9,6 +9,6 @@
 <img src='src/assets/Resultado2.png'>
 <img src='src/assets/Resultado3.png'>
 <img src='src/assets/Resultado4.png'>
-<img src='src/assets/Resultado5.png'>
-<img src='src/assets/Resultado6.png'>
+<img src='src/assets/resultado5.png'>
+<img src='src/assets/resultado6.png'>
 
