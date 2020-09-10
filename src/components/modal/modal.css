@@ -2,6 +2,10 @@
     width: 400px;
 }
 
+.margin-p{
+    margin: 10px;
+}
+
 @media(max-width:595px){
     .img-modal{
     width: 200px;
