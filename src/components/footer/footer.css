@@ -1,0 +1,17 @@
+footer{
+    width: 100%;
+    position: fixed;
+    bottom:0;
+    color: #eee;
+    background-color: black;
+    padding: 5px;
+}
+
+.container-p{
+display: flex;
+justify-content: space-around;
+}
+
+p{
+    margin:0
+}

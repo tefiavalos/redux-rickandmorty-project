@@ -1,12 +1,15 @@
 import React from 'react';
 import Main from './components/main/Main'
-import Nav from './components/nav/Nav'
+import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
 import './App.css';
 
 function App() {
   return (
     <div className='app-container'>
-    <Main></Main>
+    <Header/>
+    <Main/>
+    <Footer/>
     </div>
   );
 }
