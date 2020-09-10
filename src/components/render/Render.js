@@ -2,18 +2,20 @@ import React from 'react'
 import Card from '../card/Card'
 import Button from '../button/Button'
 import Loading from '../loading/Loading'
-import Pagination from '@material-ui/lab/Pagination'
-import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/charsDuck'
+import PropTypes from 'prop-types'
+import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/dataDuck'
 import { connect } from 'react-redux'
 import './render.css'
 
-export function Render({ characters, formSearch, handleClick, render, data, handleClickPrev, nextPage, pagesCh }) {
-    
+export function Render({  formSearch, handleClick, render, data, handleClickPrev }) {
     return (
         <>
+            
+            <div className="container-render">
+                <div className="container-button">
             <Button handleClickPrev={handleClickPrev} message={'<'} />
             <Button handleClickNext={handleClick} message={'>'} />
-            <div className="container-render">
+            </div>
                 {formSearch.length >= 3 && data.filter(data => data.name.toLowerCase().includes(formSearch)).map((data, i) => {
                     return (
                         <Card name={data.name} image={data.image} i={i}></Card>
@@ -22,13 +24,24 @@ export function Render({ characters, formSearch, handleClick, render, data, hand
                 {formSearch && formSearch.length < 3 &&
                     <Loading message={'Mientras buscas, tomá tu birrita (y dame 3 caracteres)'}/>}
                 {!formSearch && data.map(render)}
-            </div>
-            <Button handleClickPrev={handleClickPrev} message={'<'} />
+                <div className="container-button">
+                <Button handleClickPrev={handleClickPrev} message={'<'} />
             <Button handleClickNext={handleClick} message={'>'} />
-           {/*  <Pagination count={34} color="secondary" /> */}
-        </>
+            </div>
+            </div>
+            
+
+</>
     )
 }
+
+Render.propTypes = {
+    formSearch: PropTypes.string, 
+    handleClick: PropTypes.func, 
+    render: PropTypes.func, 
+    data: PropTypes.array, 
+    handleClickPrev: PropTypes.func
+  }
 
 function mapState({ data }) {
 

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Modal from '../modal/Modal'
+import PropTypes from 'prop-types';
 import './card.css'
 
 export default function Card({
-    name, image, dimension, episode, type, created, gender, species, residents, data, episodeCharacter
+    name, image, dimension, episode, type, created, gender, species, residents, episodeCharacter
 }) {
     const [open, setOpen] = React.useState(false);
 
@@ -21,8 +22,8 @@ export default function Card({
                 <h1>
                     {name}
                 </h1>
-
-                {image ? <img className="data-image" alt={name} src={image} /> : dimension || episode}
+                {image ? <img className="data-image" alt={name} src={image} /> : 
+                <p className='p-card'>{dimension || episode}</p>}
                 <button className='button-card' onClick={handleOpen}>
                     See more
                 </button>
@@ -46,3 +47,15 @@ export default function Card({
     )
 }
 
+Card.propTypes = {
+    name: PropTypes.string,
+    image: PropTypes.string,
+    dimension: PropTypes.string,
+    episode: PropTypes.string,
+    type: PropTypes.string,
+    created: PropTypes.string,
+    gender: PropTypes.string,
+    species: PropTypes.string,
+    residents: PropTypes.array,
+    episodeCharacter: PropTypes.array,
+}

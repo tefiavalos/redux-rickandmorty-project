@@ -14,3 +14,9 @@ main{
     justify-content: space-around;
     flex-wrap: wrap;
 }
+
+@media(max-width: 595px){
+    .card-container{
+        justify-content: center;
+    }
+}

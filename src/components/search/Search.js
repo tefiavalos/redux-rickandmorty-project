@@ -1,5 +1,7 @@
 import React from 'react'
 import './search.css'
+import PropTypes from 'prop-types'
+
 export default function Search({handleChange, formSearch}) {
     return (
         <form className='container-search'>
@@ -8,3 +10,8 @@ export default function Search({handleChange, formSearch}) {
         </form>
     )
 }
+
+Search.propTypes = {
+    handleChange: PropTypes.func, 
+    formSearch: PropTypes.string
+  }

@@ -1,8 +1,14 @@
 .loading-container{
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.loading-img{
+    width:100%
+}
+
 .loading{
     color: #D64045;
     text-align: center;

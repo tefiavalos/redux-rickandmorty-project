@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Card from '../card/Card'
 import Filter from '../filter/Filter'
 import Search from '../search/Search'
 import Render from '../render/Render'
 import Loading from '../loading/Loading'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/charsDuck'
+import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction, prevPageEpisodesAction, prevPageLocationAction } from '../../redux/dataDuck'
 import './main.css'
 
 
 function Home({ characters, nextPageAction, location, episode, fetching, 
-    nextPageEpisodesAction, nextPageLocationAction, prevPageAction }) {
+    nextPageEpisodesAction, nextPageLocationAction, prevPageAction, 
+    page, prevPageEpisodesAction, prevPageLocationAction }) {
+
     let [valor, setValor] = useState("characters")
     const [formSearch, setFormSearch] = useState('');
 
@@ -18,7 +21,6 @@ function Home({ characters, nextPageAction, location, episode, fetching,
         return (
             <Card {...chars} key={i} />
         )
-
     }
 
     function renderLocation(location, i) {
@@ -59,6 +61,7 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <Search handleChange={handleChange} formSearch={formSearch}></Search>
             <Render 
             handleClickPrev={prevPageAction}
+            page={page}
             handleClick={nextPageAction} 
             render={renderCharacter} 
             data={characters}
@@ -70,6 +73,7 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <>
             <Search handleChange={handleChange} formSearch={formSearch}></Search>
             <Render 
+            handleClickPrev={prevPageEpisodesAction}
             handleClick={nextPageEpisodesAction} 
             render={renderEpisode} 
             data={episode}
@@ -81,6 +85,7 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <>
             <Search handleChange={handleChange} formSearch={formSearch}></Search>
             <Render 
+            handleClickPrev={prevPageLocationAction}
             handleClick={nextPageLocationAction} 
             render={renderLocation}
             data={location}
@@ -98,11 +103,26 @@ function mapState({ data }) {
 
     return {
         characters: data.character,
-        nextPage: data.nextPage,
+        nextPage: data.nextPageCh,
         location: data.location,
         episode: data.episode,
-        fetching: data.fetching
+        fetching: data.fetching,
+        page: data.page
     }
 }
 
-export default connect(mapState, { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction })(Home)
+Home.propTypes = {
+    characters: PropTypes.array, 
+    nextPageAction: PropTypes.func, 
+    location: PropTypes.array, 
+    episode: PropTypes.array, 
+    fetching: PropTypes.bool, 
+    nextPageEpisodesAction: PropTypes.func, 
+    nextPageLocationAction: PropTypes.func, 
+    prevPageAction: PropTypes.func, 
+    page: PropTypes.number, 
+    prevPageEpisodesAction: PropTypes.func, 
+    prevPageLocationAction: PropTypes.func,
+}
+
+export default connect(mapState, { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction, prevPageEpisodesAction, prevPageLocationAction })(Home)

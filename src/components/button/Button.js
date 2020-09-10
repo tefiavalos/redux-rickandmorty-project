@@ -1,5 +1,6 @@
-import React from 'react'
-import './button.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './button.css';
 
 export default function Button({ message, handleClickPrev, handleClickNext }) {
     function handleClick () {
@@ -15,4 +16,10 @@ export default function Button({ message, handleClickPrev, handleClickNext }) {
     return (
         <button onClick={handleClick}>{message}</button>
     )
+}
+
+Button.propTypes = {
+    message: PropTypes.string,
+    handleClickPrev: PropTypes.func,
+    handleClickNext: PropTypes.func
 }

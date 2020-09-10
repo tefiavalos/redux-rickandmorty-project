@@ -1,3 +1,9 @@
 .img-modal{
     width: 400px;
 }
+
+@media(max-width:595px){
+    .img-modal{
+    width: 200px;
+    }
+}

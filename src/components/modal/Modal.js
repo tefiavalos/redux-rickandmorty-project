@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import PropTypes from 'prop-types'
 import './modal.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,6 @@ export default function TransitionsModal({handleClose, open, name, type, gender,
   
   return (
     <div>
-      
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -60,29 +60,54 @@ export default function TransitionsModal({handleClose, open, name, type, gender,
           <div className={classes.paper}>
             <h2>{name}</h2>
             {image ? 
-            <img src={image} className='img-modal'></img> : ""}
-            {type ? <p>{type}</p> : ""}
-            {gender ? <p>{gender}</p> : ""}
-            {species ? <p>{species}</p> : ""}
-            {created ? <p>{created}</p> : ""}
-            {episode ? <p>{episode}</p> : ""}
-            {dimension ? <p>{dimension}</p> : ""}
-            {residents && residents.map((resident, i)=>{
+            <img src={image} className='img-modal' alt={name}></img> : ""}
+            {type ? <p>Type: {type}</p> : ""}
+            {gender ? <p>Gender: {gender}</p> : ""}
+            {species ? <p>Species: {species}</p> : ""}
+            {created ? <p>Created: {created}</p> : ""}
+            {episode ? <p>Episode: {episode}</p> : ""}
+            {dimension ? <p>Dimension: {dimension}</p> : ""}
+            
+            {residents && 
+            <>
+            <p>Residents:</p>
+            <p>{residents.map((resident, i)=>{
               if(i<5){
               return(
-                <p>{resident.name}</p>
+                `${resident.name} - `
               )}
-            })}
-            {episodeCharacters && episodeCharacters.map((char, i)=>{
+            })}</p>
+            </>}
+            
+            {episodeCharacters && 
+            <>
+            <p>Characters:</p>
+            <p>{episodeCharacters.map((char, i)=>{
               if(i<5){
               return(
-                <p>{char.name}</p>
+                `${char.name} - `
               )}
-            })}   
+            })}</p>
+            </>}
             <button className={classes.button} onClick={handleClose}>Close</button>
           </div>
         </Fade>
       </Modal>
     </div>
   );
+}
+
+TransitionsModal.propTypes = {
+  handleClose: PropTypes.func, 
+  open: PropTypes.bool, 
+  name: PropTypes.string, 
+  type: PropTypes.string, 
+  gender: PropTypes.string, 
+  species: PropTypes.string, 
+  created: PropTypes.string, 
+  image: PropTypes.string, 
+  episode: PropTypes.string, 
+  dimension: PropTypes.string, 
+  residents: PropTypes.array, 
+  episodeCharacters: PropTypes.array
 }

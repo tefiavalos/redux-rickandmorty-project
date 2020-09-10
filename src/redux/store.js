@@ -1,10 +1,10 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import charsReducer, { getCharacterAction, getLocationsAction, getEpisodesAction } from './charsDuck'
+import dataReducer, { getCharacterAction, getLocationsAction, getEpisodesAction } from './dataDuck'
 import thunk from 'redux-thunk'
 
 
 let rootReducer = combineReducers({
-    data: charsReducer,
+    data: dataReducer,
     //locations: locationReducer
 })
 
@@ -15,9 +15,11 @@ export default function generateStore() {
         rootReducer, 
         composeEnhancers(applyMiddleware(thunk))
     )
-    // consiuiendo los persojaes por primera vez
+
     getCharacterAction()(store.dispatch, store.getState)
     getLocationsAction()(store.dispatch, store.getState)
     getEpisodesAction()(store.dispatch, store.getState)
+
+
     return store
 }
