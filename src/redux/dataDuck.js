@@ -83,7 +83,7 @@ export default function reducer(state = initialData, action) {
   }
 }
 
-// actions (thunks)
+
 export let getCharacterAction = () => (dispatch) => {
   let query = gql`
     query ($page:Int){
@@ -127,27 +127,6 @@ export let getCharacterAction = () => (dispatch) => {
       })
     })
 }
-
-/* export let getPageLo = () => (dispatch) => {
-      dispatch({
-        type: PAGE_LO,
-        payload: 1
-      })
-}
-
-export let getPageEp = () => (dispatch) => {
-      dispatch({
-        type: PAGE_EP,
-        payload: 1
-      })
-}
-
-export let getPage = () => (dispatch) => {
-      dispatch({
-        type: PAGE_CH,
-        payload: 1
-      })
-} */
 
 
 export let nextPageAction = () => (dispatch, getState) => {

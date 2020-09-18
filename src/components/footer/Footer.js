@@ -1,10 +1,9 @@
 import React from 'react'
 import './footer.css'
 
-export default function Footer(){
+const Footer = () => {
     let today = new Date()
     let date = `${today.getDate()}-${(today.getMonth())}-${(today.getFullYear())}`
-
 
     return(
        <footer>
@@ -15,3 +14,5 @@ export default function Footer(){
        </footer>
     )
 }
+
+export default Footer

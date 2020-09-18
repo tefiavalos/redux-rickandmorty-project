@@ -1,7 +1,7 @@
 import React from 'react'
 import './header.css'
 
-export default function Header(){
+const Header =() => {
 
     return(
        <header>
@@ -9,3 +9,5 @@ export default function Header(){
        </header>
     )
 }
+
+export default Header

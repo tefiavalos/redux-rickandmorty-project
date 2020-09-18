@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import img from '../../assets/beer.png'
 import './loading.css'
 
-export default function Loading({message}) {
+ const Loading = ({message}) =>{
     return(
     <div className='loading-container'>
         <h1 className='loading'>{message}</h1>
-        <img 
-        className='loading-img' 
-        src='https://images.vexels.com/media/users/3/137941/isolated/preview/62e3913301b94a8effd0e834369d8bb2-ilustraci--n-de-tarro-de-cerveza-by-vexels.png'
-        alt='loading'></img>
+        <img src={img} className='loading-img' alt='loading'></img>
     </div>
     )
 }
@@ -17,3 +15,5 @@ export default function Loading({message}) {
 Loading.propTypes = {
     message: PropTypes.string
 }
+
+export default Loading

@@ -3,9 +3,9 @@ import Modal from '../modal/Modal'
 import PropTypes from 'prop-types';
 import './card.css'
 
-export default function Card({
-    name, image, dimension, episode, type, created, gender, species, residents, episodeCharacter
-}) {
+const Card = ({
+    name, image, dimension, episode, type, created, gender, species, residents, episodeCharacters
+}) => {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -39,7 +39,7 @@ export default function Card({
                     image={image}
                     dimension={dimension}
                     episode={episode}
-                    episodeCharacters={episodeCharacter} 
+                    episodeCharacters={episodeCharacters} 
                     residents={residents}></Modal>
             </div>
 
@@ -59,3 +59,5 @@ Card.propTypes = {
     residents: PropTypes.array,
     episodeCharacter: PropTypes.array,
 }
+
+export default Card

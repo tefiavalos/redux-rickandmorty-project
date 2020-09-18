@@ -38,9 +38,39 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TransitionsModal({handleClose, open, name, type, gender, species, created, 
-  image, episode, dimension, residents, episodeCharacters}) {
+const TransitionsModal = ({handleClose, open, name, type, gender, species, created, 
+  image, episode, dimension, residents, episodeCharacters}) => {
   const classes = useStyles();
+
+  const residentsModal = () =>{
+    return(
+    residents && 
+              <>
+              <p>Residents:</p>
+              <p className='margin-p'>{residents.map((resident, i)=>{
+                if(i<5){
+                return(
+                  `${resident.name} - `
+                )}
+              })}</p>
+              </>
+    )
+  }
+
+const episodeCharactersModal = () =>{
+    return(
+      episodeCharacters && 
+            <>
+            <p>Characters:</p>
+            <p className='margin-p'>{episodeCharacters.map((char, i)=>{
+              if(i<5){
+              return(
+                `${char.name} - `
+              )}
+            })}</p>
+            </>
+    )
+  } 
   
   return (
     <div>
@@ -59,36 +89,16 @@ export default function TransitionsModal({handleClose, open, name, type, gender,
         <Fade in={open}>
           <div className={classes.paper}>
             <h2>{name}</h2>
-            {image ? 
-            <img src={image} className='img-modal' alt={name}></img> : ""}
-            {type ? <p className='margin-p'>Type: {type}</p> : ""}
-            {gender ? <p className='margin-p'>Gender: {gender}</p> : ""}
-            {species ? <p className='margin-p'>Species: {species}</p> : ""}
-            {created ? <p className='margin-p'>Created: {created}</p> : ""}
-            {episode ? <p className='margin-p'>Episode: {episode}</p> : ""}
-            {dimension ? <p className='margin-p'>Dimension: {dimension}</p> : ""}
-            
-            {residents && 
-            <>
-            <p>Residents:</p>
-            <p className='margin-p'>{residents.map((resident, i)=>{
-              if(i<5){
-              return(
-                `${resident.name} - `
-              )}
-            })}</p>
-            </>}
-            
-            {episodeCharacters && 
-            <>
-            <p>Characters:</p>
-            <p className='margin-p'>{episodeCharacters.map((char, i)=>{
-              if(i<5){
-              return(
-                `${char.name} - `
-              )}
-            })}</p>
-            </>}
+            {image &&
+            <img src={image} className='img-modal' alt={name}></img>}
+            {type && <p className='margin-p'>Type: {type}</p>}
+            {gender && <p className='margin-p'>Gender: {gender}</p>}
+            {species && <p className='margin-p'>Species: {species}</p>}
+            {created && <p className='margin-p'>Created: {created}</p>}
+            {episode && <p className='margin-p'>Episode: {episode}</p>}
+            {dimension && <p className='margin-p'>Dimension: {dimension}</p>}
+            {residentsModal()}
+            {episodeCharactersModal()}
             <button className={classes.button} onClick={handleClose}>Close</button>
           </div>
         </Fade>
@@ -111,3 +121,5 @@ TransitionsModal.propTypes = {
   residents: PropTypes.array, 
   episodeCharacters: PropTypes.array
 }
+
+export default TransitionsModal

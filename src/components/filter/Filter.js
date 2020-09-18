@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './filter.css'
 
-export default function Filter({ filter }) {
+const Filter = ({ filter }) => {
     return (
         <form className='container-filter'>
             <label className="container-input">
@@ -27,3 +27,5 @@ export default function Filter({ filter }) {
 Filter.propTypes = {
     filter: PropTypes.func
 }
+
+export default Filter

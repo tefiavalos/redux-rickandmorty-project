@@ -10,7 +10,7 @@ let rootReducer = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function generateStore() {
+let generateStore = () => {
     let store = createStore(
         rootReducer, 
         composeEnhancers(applyMiddleware(thunk))
@@ -19,7 +19,7 @@ export default function generateStore() {
     getCharacterAction()(store.dispatch, store.getState)
     getLocationsAction()(store.dispatch, store.getState)
     getEpisodesAction()(store.dispatch, store.getState)
-
-
     return store
 }
+
+export default generateStore 

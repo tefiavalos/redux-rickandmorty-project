@@ -1,6 +1,5 @@
 import React from 'react'
-import Card from '../card/Card'
-import Button from '../button/Button'
+import ButtonPagination from '../button/ButtonPagination'
 import Loading from '../loading/Loading'
 import PropTypes from 'prop-types'
 import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPageAction } from '../../redux/dataDuck'
@@ -9,24 +8,19 @@ import './render.css'
 
 export function Render({  formSearch, handleClick, render, data, handleClickPrev }) {
     return (
-        <>
-            
+        <>    
             <div className="container-render">
                 <div className="container-button">
-            <Button handleClickPrev={handleClickPrev} message={'<'} />
-            <Button handleClickNext={handleClick} message={'>'} />
+            <ButtonPagination handleClick={handleClickPrev} action={'<'} />
+            <ButtonPagination handleClick={handleClick} action={'>'} />
             </div>
-                {formSearch.length >= 3 && data.filter(data => data.name.toLowerCase().includes(formSearch)).map((data, i) => {
-                    return (
-                        <Card name={data.name} image={data.image} i={i}></Card>
-                    )
-                })}
+                {formSearch.length >= 3 && data.filter(data => data.name.toLowerCase().includes(formSearch)).map(render)}
                 {formSearch && formSearch.length < 3 &&
                     <Loading message={'Mientras buscas, tomá tu birrita (y dame 3 caracteres)'}/>}
                 {!formSearch && data.map(render)}
                 <div className="container-button">
-                <Button handleClickPrev={handleClickPrev} message={'<'} />
-            <Button handleClickNext={handleClick} message={'>'} />
+            <ButtonPagination handleClick={handleClickPrev} action={'<'} />
+            <ButtonPagination handleClick={handleClick} action={'>'} />
             </div>
             </div>
             

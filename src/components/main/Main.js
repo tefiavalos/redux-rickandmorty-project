@@ -10,33 +10,23 @@ import { nextPageAction, nextPageEpisodesAction, nextPageLocationAction, prevPag
 import './main.css'
 
 
-function Home({ characters, nextPageAction, location, episode, fetching, 
+const Home = ({ characters, episode, location, nextPageAction, fetching, 
     nextPageEpisodesAction, nextPageLocationAction, prevPageAction, 
-    page, prevPageEpisodesAction, prevPageLocationAction }) {
-
+    page, prevPageEpisodesAction, prevPageLocationAction }) => {
+        
     let [valor, setValor] = useState("characters")
     const [formSearch, setFormSearch] = useState('');
 
-    function renderCharacter(chars, i) {
+    const renderData = (data, i) => {
         return (
-            <Card {...chars} key={i} />
+            <Card 
+            {...data}
+            key={i}
+            episodeCharacters={data.characters} /> 
         )
     }
 
-    function renderLocation(location, i) {
-        return (
-            <Card {...location} key={i} />
-        )
-    }
-
-    function renderEpisode(episode, i) {
-        return (
-            <Card {...episode} episodeCharacter={episode.characters} key={i} />
-            
-        )
-    }
-
-    function filter(e) {
+    const filter = (e) => {
         return (
             setValor(e.target.value)
         )
@@ -61,9 +51,9 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <Search handleChange={handleChange} formSearch={formSearch}></Search>
             <Render 
             handleClickPrev={prevPageAction}
-            page={page}
             handleClick={nextPageAction} 
-            render={renderCharacter} 
+            page={page}
+            render={renderData} 
             data={characters}
             valor={valor}
             formSearch={formSearch}></Render>
@@ -75,7 +65,8 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <Render 
             handleClickPrev={prevPageEpisodesAction}
             handleClick={nextPageEpisodesAction} 
-            render={renderEpisode} 
+            page={page}
+            render={renderData} 
             data={episode}
             valor={valor}
             formSearch={formSearch}></Render>
@@ -87,7 +78,8 @@ function Home({ characters, nextPageAction, location, episode, fetching,
             <Render 
             handleClickPrev={prevPageLocationAction}
             handleClick={nextPageLocationAction} 
-            render={renderLocation}
+            page={page}
+            render={renderData}
             data={location}
             valor={valor}
             formSearch={formSearch}></Render>
