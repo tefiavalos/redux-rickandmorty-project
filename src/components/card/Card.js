@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from '../modal/Modal'
 import PropTypes from 'prop-types';
+import GeneralButton from '../generalButton/GeneralButton'
 import './card.css'
 
 const Card = ({
@@ -24,9 +25,7 @@ const Card = ({
                 </h1>
                 {image ? <img className="data-image" alt={name} src={image} /> : 
                 <p className='p-card'>{dimension || episode}</p>}
-                <button className='button-card' onClick={handleOpen}>
-                    See more
-                </button>
+                <GeneralButton className='button-card' handleClick={handleOpen} message={'see more'}/>
                 <Modal
                     handleClose={handleClose}
                     handleOpen={handleOpen}

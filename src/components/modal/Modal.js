@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import PropTypes from 'prop-types'
+import GeneralButton from '../generalButton/GeneralButton'
 import './modal.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +58,7 @@ const TransitionsModal = ({handleClose, open, name, type, gender, species, creat
     )
   }
 
-const episodeCharactersModal = () =>{
+  const episodeCharactersModal = () =>{
     return(
       episodeCharacters && 
             <>
@@ -99,7 +100,7 @@ const episodeCharactersModal = () =>{
             {dimension && <p className='margin-p'>Dimension: {dimension}</p>}
             {residentsModal()}
             {episodeCharactersModal()}
-            <button className={classes.button} onClick={handleClose}>Close</button>
+            <GeneralButton classButton={'modal-button'} handleClick={handleClose} message={'Close'}/>
           </div>
         </Fade>
       </Modal>
