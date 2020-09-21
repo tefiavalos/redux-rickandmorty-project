@@ -42,37 +42,22 @@ const useStyles = makeStyles((theme) => ({
 const TransitionsModal = ({handleClose, open, name, type, gender, species, created, 
   image, episode, dimension, residents, episodeCharacters}) => {
   const classes = useStyles();
-
-  const residentsModal = () =>{
+  
+  const renderChars = (data) =>{
     return(
-    residents && 
-              <>
-              <p>Residents:</p>
-              <p className='margin-p'>{residents.map((resident, i)=>{
-                if(i<5){
-                return(
-                  `${resident.name} - `
-                )}
-              })}</p>
-              </>
-    )
-  }
-
-  const episodeCharactersModal = () =>{
-    return(
-      episodeCharacters && 
+      data && 
             <>
             <p>Characters:</p>
-            <p className='margin-p'>{episodeCharacters.map((char, i)=>{
+            <p className='margin-p'>{data.map((data, i)=>{
               if(i<5){
               return(
-                `${char.name} - `
+                `${data.name} - `
               )}
             })}</p>
             </>
     )
   } 
-  
+
   return (
     <div>
       <Modal
@@ -98,8 +83,8 @@ const TransitionsModal = ({handleClose, open, name, type, gender, species, creat
             {created && <p className='margin-p'>Created: {created}</p>}
             {episode && <p className='margin-p'>Episode: {episode}</p>}
             {dimension && <p className='margin-p'>Dimension: {dimension}</p>}
-            {residentsModal()}
-            {episodeCharactersModal()}
+            {renderChars(residents)}
+            {renderChars(episodeCharacters)}
             <GeneralButton classButton={'modal-button'} handleClick={handleClose} message={'Close'}/>
           </div>
         </Fade>
